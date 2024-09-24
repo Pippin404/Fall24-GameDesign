@@ -10,7 +10,7 @@ Log each achievement
 -Made a trello board
 -Made a github repo
 -Made project, character, and controller support
-
+-Using  platformer youtube tutorial as a refresher
 
 
 Markdown Docs:
