@@ -11,7 +11,8 @@ Log each achievement
 -Made a github repo
 -Made project, character, and controller support
 -Using  platformer youtube tutorial as a refresher
-
+-Added Tilemap and tilesets
+-Attempted to do celeste style room camera controls
 
 Markdown Docs:
 https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax
