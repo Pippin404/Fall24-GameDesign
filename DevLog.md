@@ -6,9 +6,10 @@
 Log each achievement
 
 
-### 9 24 24
+### 5:00 - 9 24 24
 -Made a trello board
 -Made a github repo
+-Made project, character, and controller support
 
 
 
