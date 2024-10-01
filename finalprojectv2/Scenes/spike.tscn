@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://da7w01mw6mebf"]
+
+[ext_resource type="Texture2D" uid="uid://cfpgc2m75j2s0" path="res://Sprites/New Piskel (1).png" id="1_dwqwu"]
+[ext_resource type="PackedScene" uid="uid://c3p26qob8nx76" path="res://Scenes/killzone.tscn" id="2_qxv4c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lvfb2"]
+size = Vector2(4.5, 2.5)
+
+[node name="Spike" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_dwqwu")
+
+[node name="Killzone" parent="." instance=ExtResource("2_qxv4c")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(-0.25, 2.25)
+shape = SubResource("RectangleShape2D_lvfb2")
