@@ -9,10 +9,6 @@ size = Vector2(6, 7)
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_yoj5i")
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.156
-one_shot = true
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -4)
 texture = ExtResource("1_cobva")
@@ -20,5 +16,3 @@ texture = ExtResource("1_cobva")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3.5)
 shape = SubResource("RectangleShape2D_wgfre")
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
