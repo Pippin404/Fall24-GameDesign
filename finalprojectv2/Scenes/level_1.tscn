@@ -89,7 +89,6 @@ zoom = Vector2(5, 5)
 limit_top = -60
 limit_bottom = 60
 limit_smoothed = true
-position_smoothing_enabled = true
 script = ExtResource("4_y3l5x")
 
 [node name="Killzone" parent="." instance=ExtResource("5_w5131")]

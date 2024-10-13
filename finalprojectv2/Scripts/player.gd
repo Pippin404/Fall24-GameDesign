@@ -1,65 +1,66 @@
 extends CharacterBody2D
 @onready var timer: Timer = $Timer
+@onready var dash_snd: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var sprite_2d: Sprite2D = $Sprite2D
+const sprP1Dash = preload("res://Sprites/sprP1Dash.png")
+const sprP1Idle = preload("res://Sprites/sprP1.png")
 
-var directionSide=0;
-var dashing=false;
-var storeTempVelocity=0;
-const SPEED = 120.0
-const JUMP_VELOCITY = -250.0
-var DASHMAG=100;
-var XcustomVelocity=0;
+const SPEED = 150.0
+const JUMP_VELOCITY = -230.0
+var facing=0;
+var dashing = false;
+
+
+# END DASH
+func _on_timer_timeout() -> void:
+	dashing=false;
+	sprite_2d.texture=sprP1Idle
 
 
 func _physics_process(delta: float) -> void:
-	# ADD X VELOCITY
-	velocity.x = XcustomVelocity;
 	
-	# If grounded, be on floor
-	if is_on_floor():
-		XcustomVelocity=0;
-	
-	# Add the gravity. if dashing, add a little less. 
-	if not is_on_floor():
-		if dashing==false:
-			velocity += get_gravity() * delta
+	# Dash here!
+	if dashing:
+		print("dashing!")
+		if facing==0:
+			velocity.x = 1 * SPEED * 2
 		else:
-			velocity +=get_gravity()/5 * delta;
-			
-
-
-	#DASH TIME!!!!
-	if Input.is_action_just_pressed("ui_text_caret_left"):
-		dashing=!dashing;
-		timer.start();
-		
-
-	#if dashing==true:
-		
-		
+			velocity.x = -1 * SPEED * 2
+	
+	# Add the gravity. DASH SPECIFIC
+	# TODO HANDLE DASHING HERE
+	if not is_on_floor():
+		velocity += get_gravity() * delta
 
 
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("Jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		# TODO HANDLE DASHING HERE
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("ui_left", "ui_right")
-	if direction and dashing==false:
+	#START DASH!
+	if Input.is_action_just_pressed("Dash"):
+			dash_snd.play();
+			dashing=true;
+			velocity.y+=-100;
+			sprite_2d.texture= sprP1Dash;
+			timer.start();
+
+
+	if !dashing:
+		# Get the input direction and handle the movement/deceleration.
+		var direction := Input.get_axis("MoveLeft", "moveRight")
 		if direction <0:
-			directionSide=1;
-		else:
-			directionSide=0;
-			
-		velocity.x = direction * SPEED
+			facing=1;
+			sprite_2d.flip_h=false;
+		if direction==1:
+			sprite_2d.flip_h=true;
+			facing=0;
 		
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		if direction:
+			velocity.x = direction * SPEED
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
+
 
 	move_and_slide()
-
-
-func _on_timer_timeout() -> void:
-	dashing=false;
-	velocity.y=storeTempVelocity;
-	XcustomVelocity=SPEED/6;
