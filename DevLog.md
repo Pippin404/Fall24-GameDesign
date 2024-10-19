@@ -6,6 +6,12 @@
 * I completed [XYZ](some-link-to-ticket)
 
 
+### 10-19-24 2hr: Character acceleration Revamp
+* Limited dashes per floor touch to 1
+* Adjusted character acceleration
+* Varbile jump
+
+
 ### 10-13-24 2hr: Character revamp and playtesting out of class
 * Restarted charcter script from scratch and made dash
 * added curve to dash. (Small upwards velocity boost)
