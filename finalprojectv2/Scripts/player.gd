@@ -2,11 +2,13 @@ extends CharacterBody2D
 @onready var timer: Timer = $Timer
 @onready var dash_snd: AudioStreamPlayer2D = $AudioStreamPlayer2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var jump_height_timer: Timer = $jumpHeightTimer
+
 const sprP1Dash = preload("res://Sprites/sprP1Dash.png")
 const sprP1Idle = preload("res://Sprites/sprP1.png")
 #Jumping
-const JUMP_VELOCITY = 230.0
-const JUMP_ACCELLERATION_MAG=80
+const JUMP_VELOCITY = 250.0
+const JUMP_ACCELLERATION_MAG=50
 #Dashing
 const DASH_MULTIPLER=2.5;
 #Running
@@ -23,17 +25,11 @@ var facing=0;
 var dashing = false;
 var dashesLeft=1;
 #--------------------------------------------------------------|
-# END DASH
-func _on_timer_timeout() -> void:
-	dashing=false;
-	sprite_2d.texture=sprP1Idle
-
-
 func _physics_process(delta: float) -> void:
 	
 	# Dash here!
 	if dashing:
-		print("dashing!")
+		#print("dashing!")
 		if facing==0:
 			velocity.x = 1 * MAX_SPEED * DASH_MULTIPLER
 		else:
@@ -49,6 +45,7 @@ func _physics_process(delta: float) -> void:
 
 	# Handle jump.
 	if Input.is_action_just_pressed("Jump") and is_on_floor():
+		jump_height_timer.start();
 		velocity.y =JUMP_VELOCITY*-1
 
 
@@ -87,3 +84,18 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, MAX_SPEED/5)
 
 	move_and_slide()
+
+# END DASH
+func _on_timer_timeout() -> void:
+	dashing=false;
+	sprite_2d.texture=sprP1Idle
+
+#Varible Jump Height
+func _on_jump_height_timer_timeout() -> void:
+	if !Input.is_action_pressed("Jump"):
+		print("Small jump");
+		if velocity.y<0:
+			velocity.y=0;
+	else:
+		print("High Jump");
+		dash_snd.play();

@@ -6,10 +6,11 @@
 * I completed [XYZ](some-link-to-ticket)
 
 
-### 10-19-24 2hr: Character acceleration Revamp
+### 10-19-24 2.5hr: Character acceleration Revamp
 * Limited dashes per floor touch to 1
 * Adjusted character acceleration
-* Varbile jump
+* Added Varible Jump Height
+* Used Tutorial https://www.youtube.com/watch?v=4m34vwvrFVE&t=273s for varible jump height. I dont like it that much
 
 
 ### 10-13-24 2hr: Character revamp and playtesting out of class

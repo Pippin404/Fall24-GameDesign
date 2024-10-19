@@ -25,4 +25,9 @@ shape = SubResource("RectangleShape2D_wgfre")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_8tuy1")
 
+[node name="jumpHeightTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="jumpHeightTimer" to="." method="_on_jump_height_timer_timeout"]
