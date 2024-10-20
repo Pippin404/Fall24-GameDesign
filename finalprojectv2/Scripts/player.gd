@@ -31,29 +31,38 @@ var slow_down=1;
 func _physics_process(delta: float) -> void:	
 	
 	slow_down=SlowDownController.slowMow;
-	
-	
+	if slow_down==0:
+		velocity.y=0;
 	
 	# Dash here!
 	if dashing:
 		#print("dashing!")
 		if facing==0:
-			velocity.x = 1 * MAX_SPEED * DASH_MULTIPLER 
+			velocity.x = 1 * MAX_SPEED * DASH_MULTIPLER *slow_down
 		else:
-			velocity.x = -1 * MAX_SPEED * DASH_MULTIPLER
+			velocity.x = -1 * MAX_SPEED * DASH_MULTIPLER *slow_down
 	
 	# Add the gravity. DASH SPECIFIC
 	# TODO HANDLE DASHING HERE
 	if not is_on_floor():
-		velocity += get_gravity() * delta
-	else:
+		#Case for NO FALLING WHILE SLOWDOWN
+		if slow_down!=0:
+			velocity += get_gravity() * delta *slow_down
+			
+	if is_on_floor():
 		dashesLeft=1;
 
-
 	# Handle jump.
-	if Input.is_action_just_pressed("Jump") and is_on_floor():
+	if Input.is_action_just_pressed("Jump") and is_on_floor() and slow_down!=0:
 		jump_height_timer.start();
-		velocity.y =JUMP_VELOCITY*-1
+		if slow_down==1:
+			velocity.y =JUMP_VELOCITY*-1*slow_down
+		else:
+			if slow_down>.2:
+			#SLOWDOWN JUMP MAGNITUDE
+			#If the slowdown is not 0, we need a special case to make sure the slowdown jump is bigger
+				velocity.y =JUMP_VELOCITY*-1*.5;
+			
 
 
 
@@ -63,9 +72,14 @@ func _physics_process(delta: float) -> void:
 		if dashesLeft>=1:
 			dash_snd.play();
 			dashing=true;
-			velocity.y+=-100;
 			sprite_2d.texture= sprP1Dash;
 			dashesLeft-=1;
+			
+			if velocity.y>1: #If we are moving DOWN
+				velocity.y=-JUMP_VELOCITY/4 #1/4th of a jump
+			else: #Moving up. add a boost
+				velocity.y+=-100 *slow_down;
+			
 			timer.start();
 
 
@@ -80,9 +94,9 @@ func _physics_process(delta: float) -> void:
 			facing=0;
 		
 		if direction:
-				velocity.x = direction * Accelleration
+				velocity.x = direction * Accelleration *slow_down
 				if Accelleration<=MAX_SPEED:
-					Accelleration+=ACCELERATION_MAG;
+					Accelleration+=ACCELERATION_MAG *slow_down;
 				#else:
 					#dash_snd.play();
 		else:

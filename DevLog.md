@@ -6,9 +6,10 @@
 * I completed [XYZ](some-link-to-ticket)
 
 
-### 10-20-24 2.5hr: Slowdown & Effects
+### 10-20-24 2hr: Slowdown & Effects
 * Added Slowdown. Trigger on controller, or Z on keyboard
-
+* Added sounds for slowdown
+* Slowdown increaces over small timeframe, leaving player frozen until dash/slowdown is done again (Main mechanic)
 
 ### 10-19-24 2.5hr: Character acceleration Revamp
 * Limited dashes per floor touch to 1
