@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var dash_snd: AudioStreamPlayer2D = $AudioStreamPlayer2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var jump_height_timer: Timer = $jumpHeightTimer
+@onready var SlowDownController: Node2D = $"../SlowDownCntrl"
 
 const sprP1Dash = preload("res://Sprites/sprP1Dash.png")
 const sprP1Idle = preload("res://Sprites/sprP1.png")
@@ -24,14 +25,20 @@ var facing=0;
 #Dashing
 var dashing = false;
 var dashesLeft=1;
+#Slowmo 
+var slow_down=1;
 #--------------------------------------------------------------|
-func _physics_process(delta: float) -> void:
+func _physics_process(delta: float) -> void:	
+	
+	slow_down=SlowDownController.slowMow;
+	
+	
 	
 	# Dash here!
 	if dashing:
 		#print("dashing!")
 		if facing==0:
-			velocity.x = 1 * MAX_SPEED * DASH_MULTIPLER
+			velocity.x = 1 * MAX_SPEED * DASH_MULTIPLER 
 		else:
 			velocity.x = -1 * MAX_SPEED * DASH_MULTIPLER
 	
@@ -93,9 +100,9 @@ func _on_timer_timeout() -> void:
 #Varible Jump Height
 func _on_jump_height_timer_timeout() -> void:
 	if !Input.is_action_pressed("Jump"):
-		print("Small jump");
+		#print("Small jump");
 		if velocity.y<0:
 			velocity.y=0;
-	else:
-		print("High Jump");
-		dash_snd.play();
+	#else:
+		#print("High Jump");
+		#dash_snd.play();

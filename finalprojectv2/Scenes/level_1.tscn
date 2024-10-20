@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://m47tgy6gdpmk"]
+[gd_scene load_steps=18 format=3 uid="uid://m47tgy6gdpmk"]
 
 [ext_resource type="PackedScene" uid="uid://bh33t2tn125o7" path="res://Scenes/player.tscn" id="1_hw5io"]
+[ext_resource type="Script" path="res://Scripts/slow_down_cntrl.gd" id="1_khv2t"]
 [ext_resource type="Texture2D" uid="uid://dl7dwwgc5rrxi" path="res://Sprites/TileMapFg.png" id="2_mw0b8"]
 [ext_resource type="Texture2D" uid="uid://3uarxhj865x6" path="res://Sprites/TilemapBG.png" id="3_gqj0h"]
 [ext_resource type="Texture2D" uid="uid://ct6a65a32kdri" path="res://Sprites/chainSheet.png" id="4_i1ayy"]
@@ -8,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://c3p26qob8nx76" path="res://Scenes/killzone.tscn" id="5_w5131"]
 [ext_resource type="Script" path="res://Scripts/killzone.gd" id="6_44c1r"]
 [ext_resource type="PackedScene" uid="uid://da7w01mw6mebf" path="res://Scenes/spike.tscn" id="8_qwhpl"]
+[ext_resource type="AudioStream" uid="uid://bwpawpqi55ic2" path="res://Sounds/sndSlowDown.mp3" id="10_ks53i"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_plu8p"]
 
@@ -122,5 +124,12 @@ position = Vector2(36, -20)
 
 [node name="Spike" parent="." instance=ExtResource("8_qwhpl")]
 position = Vector2(44, -20)
+
+[node name="SlowDownCntrl" type="Node2D" parent="."]
+position = Vector2(-117, -14)
+script = ExtResource("1_khv2t")
+
+[node name="snd_SlowDown" type="AudioStreamPlayer2D" parent="SlowDownCntrl"]
+stream = ExtResource("10_ks53i")
 
 [connection signal="body_entered" from="Killzone" to="Killzone" method="_on_body_entered"]
