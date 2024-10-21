@@ -49,6 +49,8 @@ func _physics_process(delta: float) -> void:
 		if slow_down!=0:
 			velocity += get_gravity() * delta *slow_down
 			
+			
+			
 	if is_on_floor():
 		dashesLeft=1;
 
@@ -58,10 +60,9 @@ func _physics_process(delta: float) -> void:
 		if slow_down==1:
 			velocity.y =JUMP_VELOCITY*-1*slow_down
 		else:
-			if slow_down>.2:
 			#SLOWDOWN JUMP MAGNITUDE
 			#If the slowdown is not 0, we need a special case to make sure the slowdown jump is bigger
-				velocity.y =JUMP_VELOCITY*-1*.5;
+			velocity.y =JUMP_VELOCITY*-1*slow_down/4;
 			
 
 
