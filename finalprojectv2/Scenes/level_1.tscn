@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://m47tgy6gdpmk"]
+[gd_scene load_steps=20 format=3 uid="uid://m47tgy6gdpmk"]
 
 [ext_resource type="PackedScene" uid="uid://bh33t2tn125o7" path="res://Scenes/player.tscn" id="1_hw5io"]
 [ext_resource type="Script" path="res://Scripts/slow_down_cntrl.gd" id="1_khv2t"]
@@ -10,6 +10,11 @@
 [ext_resource type="Script" path="res://Scripts/killzone.gd" id="6_44c1r"]
 [ext_resource type="PackedScene" uid="uid://da7w01mw6mebf" path="res://Scenes/spike.tscn" id="8_qwhpl"]
 [ext_resource type="AudioStream" uid="uid://bwpawpqi55ic2" path="res://Sounds/sndSlowDown.mp3" id="10_ks53i"]
+[ext_resource type="Shader" path="res://Scenes/level_1.gdshader" id="11_brvdh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ksg18"]
+shader = ExtResource("11_brvdh")
+shader_parameter/weighted = true
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_plu8p"]
 
@@ -81,6 +86,10 @@ sources/1 = SubResource("TileSetAtlasSource_obwvj")
 
 [node name="Level_1" type="Node2D"]
 
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+material = SubResource("ShaderMaterial_ksg18")
+color = Color(0.620167, 0.620167, 0.620167, 1)
+
 [node name="Player" parent="." instance=ExtResource("1_hw5io")]
 position = Vector2(-77, 0)
 collision_layer = 2
@@ -132,4 +141,8 @@ script = ExtResource("1_khv2t")
 [node name="snd_SlowDown" type="AudioStreamPlayer2D" parent="SlowDownCntrl"]
 stream = ExtResource("10_ks53i")
 
+[node name="slowdown_stopper_timer" type="Timer" parent="SlowDownCntrl"]
+wait_time = 2.629
+
 [connection signal="body_entered" from="Killzone" to="Killzone" method="_on_body_entered"]
+[connection signal="timeout" from="SlowDownCntrl/slowdown_stopper_timer" to="SlowDownCntrl" method="_on_slowdown_stopper_timer_timeout"]

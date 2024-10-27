@@ -147,7 +147,7 @@ func burst_dash() -> void:
 	#print("Dash end!");
 	#dash_snd.play();
 	#check each input and add velocity. NO SETTING VELOCITY TO 0, ALLOWS FOR DIAGONAL
-	velocity.y=velocity.y-20;
+	velocity.x=0;
 	
 	
 	if Input.is_action_pressed("JoypadUp"):

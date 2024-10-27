@@ -6,7 +6,9 @@
 * I completed [XYZ](some-link-to-ticket)
 
 
-### 10-27-24: 3hr: Final mechanic adjustments
+### 10-27-24: 5hr: Final mechanic adjustments
+* Added visual layer for slowdown: Simply a hidden canvas item. Its kinda bad https://forum.godotengine.org/t/help-with-managing-visibility-in-code/69472/12
+* Added timer to end slowdown
 * added second dash!
 * Made dash length longer
 * Decided to remove directional dash
