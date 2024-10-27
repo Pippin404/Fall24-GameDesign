@@ -152,21 +152,19 @@ func burst_dash() -> void:
 	
 	if Input.is_action_pressed("JoypadUp"):
 		velocity.y=velocity.y-BURST_VERT_MOVE;
-		print("up");
+		#print("up");
 		
 	if  Input.is_action_pressed("JoypadDown"):
 		velocity.y=velocity.y+BURST_VERT_MOVE/10;
-		print("down");
+		#print("down");
 		
 	if Input.is_action_pressed("moveRight"):
 		velocity.y+=DASH_VERT_BOOST;#vert boost is negative
 		velocity.x=velocity.x+BURT_HORIZ_MOVE;
-		print("right");
+		#print("right");
 		
 	if Input.is_action_pressed("MoveLeft"):
 		velocity.y+=DASH_VERT_BOOST;#vert boost is negative
 		velocity.x=velocity.x-BURT_HORIZ_MOVE;
-		print("left");
-	
-	
+		#print("left");
 	dashing=false;
