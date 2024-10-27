@@ -6,6 +6,17 @@
 * I completed [XYZ](some-link-to-ticket)
 
 
+### 10-27-24: 3hr: Final mechanic adjustments
+* added second dash!
+* Made dash length longer
+* Decided to remove directional dash
+* Added slower falling
+* Slowdown Happens faster
+* Adjusted little jump
+* Acceleration magnitude lowered. 
+* Added more practice platforms
+
+
 ### 10-20-24 2hr: Slowdown & Effects
 * Added Slowdown. Trigger on controller, or Z on keyboard
 * Added sounds for slowdown

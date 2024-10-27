@@ -3,7 +3,7 @@ extends Area2D
 
 
 func _on_body_entered(body: Node2D) -> void:
-	print("DEATH!")
+	#print("DEATH!")
 	get_tree().reload_current_scene();
 	
 	## Timer DOES NOT WORK this will do I guess

@@ -2,9 +2,11 @@ extends Node2D
 const SLOW_DOWN_MAG=.3
 @onready var snd_slow_down: AudioStreamPlayer2D = $snd_SlowDown
 @onready var snd_dash: AudioStreamPlayer2D = $Player/AudioStreamPlayer2D
+@onready var jump_height_timer: Timer = $jumpHeightTimer
+@onready var player: CharacterBody2D = $"../Player"
 
 var slowMow=1;
-var slowingRate=.925
+var slowingRate=.7
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -19,25 +21,28 @@ func _process(delta: float) -> void:
 	#SLOWING DOWN
 	if slowMow<1 and slowMow!=0:
 		slowMow=slowMow*slowingRate;
-		if slowMow<.0005:
-			print(slowMow)
+		if slowMow<.0001:
+			#print(slowMow)
 			slowMow=0;
-			print(slowMow)
+			#print(slowMow)
 	
 	
 	
 	#Press slowmow to slow down
 	if Input.is_action_just_pressed("SlowMo"):
 		
+		
 		#TODO MAKE SLOWING DOWN YOU GO TO A STOP OVER TIME. 
 		if slowMow==1:
 			slowMow=SLOW_DOWN_MAG;
 			snd_slow_down.play();
+			player.slow_down_ticker=1;
 			#print(slowMow);
 		else:
 			slowMow=1;
+			player.slow_down_ticker=0;
 			#print(slowMow);
-		
+		print(player.slow_down_ticker);
 	
 	
 	#Press dash to stop
