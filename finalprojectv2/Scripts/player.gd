@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var SlowDownController: Node2D = $"../SlowDownCntrl"
 @onready var snd_dash: AudioStreamPlayer2D = $snd_dash
 @onready var snd_jmp: AudioStreamPlayer2D = $snd_jmp
+@onready var animated_spr: AnimatedSprite2D = $AnimatedSprite2D
 
 
 const sprP1Dash = preload("res://Sprites/sprP1Dash.png")
@@ -28,6 +29,7 @@ const ACCELERATION_MAG=4;
 #--------------------------------------------------------------|
 #Jumping
 var Jump_Accelleration=JUMP_ACCELLERATION_MAG
+var jumping=false;
 #Running
 var Accelleration=DEFUALT_ACCELERATION;
 var facing=0;
@@ -37,9 +39,9 @@ var dashesLeft=1;
 #Slowmo 
 var slow_down=1;
 var slow_down_ticker=0; #so 0 is normal, 1 is slowdown
+
 #--------------------------------------------------------------|
 func _physics_process(delta: float) -> void:
-	
 	slow_down=SlowDownController.slowMow;
 	if slow_down==0:
 		velocity.y=0;
@@ -59,7 +61,6 @@ func _physics_process(delta: float) -> void:
 			velocity.x = 1 * MAX_SPEED * DASH_MULTIPLER *slow_down
 		else:
 			velocity.x = -1 * MAX_SPEED * DASH_MULTIPLER *slow_down
-	
 	# Add the gravity. DASH SPECIFIC
 	# TODO HANDLE DASHING HERE
 	if not is_on_floor():
@@ -72,13 +73,16 @@ func _physics_process(delta: float) -> void:
 				velocity += get_gravity() * delta *slow_down*.4;
 		
 			
-			
+	#THIS WILL WORK FOR NOW!!!
 	if is_on_floor():
 		dashesLeft=1;
+		jumping=false;
+
 
 	# Handle jump.
 	if Input.is_action_just_pressed("Jump") and is_on_floor() and slow_down!=0:
 		snd_jmp.play();
+		jumping=true;
 		jump_height_timer.start();
 		if slow_down==1:
 			velocity.y =-1*(JUMP_VELOCITY*slow_down);
@@ -96,7 +100,7 @@ func _physics_process(delta: float) -> void:
 		if dashesLeft>=1:
 			snd_dash.play();
 			dashing=true;
-			sprite_2d.texture= sprP1Dash;
+			#sprite_2d.texture= sprP1Dash;
 			dashesLeft-=1;
 			
 			if velocity.y>1: #If we are moving DOWN
@@ -106,16 +110,32 @@ func _physics_process(delta: float) -> void:
 			
 			dash_timer.start();
 
+	if dashing:
+			animated_spr.play("dash");
+			print("dashing!");
+
 
 	if !dashing:
 		# Get the input direction and handle the movement/deceleration.
 		var direction := Input.get_axis("MoveLeft", "moveRight")
 		if direction <0:
 			facing=1;
-			sprite_2d.flip_h=false;
+			animated_spr.flip_h=true;
 		if direction==1:
-			sprite_2d.flip_h=true;
+			animated_spr.flip_h=false;
 			facing=0;
+		
+		
+		#ANIMATION ZONE!
+		if jumping:
+			animated_spr.play("jump");
+		elif is_on_floor():
+			if direction:
+				animated_spr.play("run");
+			else:
+				animated_spr.play("idle");
+		
+		
 		
 		if direction:
 				velocity.x = direction * Accelleration *slow_down
@@ -127,12 +147,13 @@ func _physics_process(delta: float) -> void:
 			#Deceleration
 			Accelleration=DEFUALT_ACCELERATION;
 			velocity.x = move_toward(velocity.x, 0, MAX_SPEED/5)
-
+		
+	
 	move_and_slide()
 
 # END DASH
 func _on_timer_timeout() -> void:
-	sprite_2d.texture=sprP1Idle
+	#sprite_2d.texture=sprP1Idle
 	burst_dash();
 
 #Varible Jump Height
