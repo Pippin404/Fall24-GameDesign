@@ -6,6 +6,11 @@
 * I completed [XYZ](some-link-to-ticket)
 
 
+### 10-29-24 2hr: Sounds, Sprite updates
+* Added new jump sound, new dash sound
+* Added new sprite set
+
+
 ### 10-27-24: 5hr: Final mechanic adjustments
 * Added visual layer for slowdown: Simply a hidden canvas item. Its kinda bad https://forum.godotengine.org/t/help-with-managing-visibility-in-code/69472/12
 * Added timer to end slowdown
