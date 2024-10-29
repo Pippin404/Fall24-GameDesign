@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bh33t2tn125o7"]
+[gd_scene load_steps=7 format=3 uid="uid://bh33t2tn125o7"]
 
 [ext_resource type="Texture2D" uid="uid://ctrr54rhcnl8g" path="res://Sprites/New Piskel (2).png" id="1_cobva"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_yoj5i"]
 [ext_resource type="AudioStream" uid="uid://dakdonx6nvyn1" path="res://Sounds/hit-3.wav" id="3_8tuy1"]
+[ext_resource type="AudioStream" uid="uid://b55nfehdylowu" path="res://Sounds/jump-3.wav" id="3_ot83w"]
+[ext_resource type="AudioStream" uid="uid://kbw2q84nbbgm" path="res://Sounds/dashv2.mp3" id="4_qal4t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wgfre"]
 size = Vector2(6, 7)
@@ -22,12 +24,18 @@ texture = ExtResource("1_cobva")
 position = Vector2(0, -3.5)
 shape = SubResource("RectangleShape2D_wgfre")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_8tuy1")
-
 [node name="jumpHeightTimer" type="Timer" parent="."]
 wait_time = 0.07
 one_shot = true
+
+[node name="snd_jmp" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ot83w")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_8tuy1")
+
+[node name="snd_dash" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_qal4t")
 
 [connection signal="timeout" from="dash_timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="jumpHeightTimer" to="." method="_on_jump_height_timer_timeout"]

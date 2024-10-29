@@ -4,6 +4,9 @@ extends CharacterBody2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var jump_height_timer: Timer = $jumpHeightTimer
 @onready var SlowDownController: Node2D = $"../SlowDownCntrl"
+@onready var snd_dash: AudioStreamPlayer2D = $snd_dash
+@onready var snd_jmp: AudioStreamPlayer2D = $snd_jmp
+
 
 const sprP1Dash = preload("res://Sprites/sprP1Dash.png")
 const sprP1Idle = preload("res://Sprites/sprP1.png")
@@ -75,6 +78,7 @@ func _physics_process(delta: float) -> void:
 
 	# Handle jump.
 	if Input.is_action_just_pressed("Jump") and is_on_floor() and slow_down!=0:
+		snd_jmp.play();
 		jump_height_timer.start();
 		if slow_down==1:
 			velocity.y =-1*(JUMP_VELOCITY*slow_down);
@@ -90,7 +94,7 @@ func _physics_process(delta: float) -> void:
 	#START DASH!
 	if Input.is_action_just_pressed("Dash"):
 		if dashesLeft>=1:
-			dash_snd.play();
+			snd_dash.play();
 			dashing=true;
 			sprite_2d.texture= sprP1Dash;
 			dashesLeft-=1;
@@ -149,9 +153,9 @@ func burst_dash() -> void:
 	#check each input and add velocity. NO SETTING VELOCITY TO 0, ALLOWS FOR DIAGONAL
 	velocity.x=0;
 	
-	
 	if Input.is_action_pressed("JoypadUp"):
 		velocity.y=velocity.y-BURST_VERT_MOVE;
+		snd_dash.play();
 		#print("up");
 		
 	if  Input.is_action_pressed("JoypadDown"):

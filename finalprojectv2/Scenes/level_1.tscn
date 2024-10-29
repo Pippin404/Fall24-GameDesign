@@ -91,7 +91,7 @@ material = SubResource("ShaderMaterial_ksg18")
 color = Color(0.620167, 0.620167, 0.620167, 1)
 
 [node name="Player" parent="." instance=ExtResource("1_hw5io")]
-position = Vector2(-77, 0)
+position = Vector2(-76, 0)
 collision_layer = 2
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
