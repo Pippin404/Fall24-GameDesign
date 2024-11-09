@@ -112,7 +112,7 @@ func _physics_process(delta: float) -> void:
 
 	if dashing:
 			animated_spr.play("dash");
-			print("dashing!");
+			#print("dashing!");
 
 
 	if !dashing:

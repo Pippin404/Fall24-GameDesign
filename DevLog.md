@@ -3,7 +3,13 @@
   topdown character in godot. (two spaces to continue bullet)
 * Ran into issue with XYZ, so used ChatGPT to figure it out by doing ABC
 * TODO: I still need to get the projectile working.
-* I completed [XYZ](some-link-to-ticket)
+* I completed [XYZ](some-link-to-ticket) 
+
+
+
+### 11-09-24 2hr: Sprites and level rework
+* Added new tiletset
+* Todo: randomize tiles, make tilemap set? for easy building
 
 
 ### 10-29-24 2hr: Sounds, Sprite updates
