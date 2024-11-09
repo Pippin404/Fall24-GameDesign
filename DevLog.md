@@ -8,7 +8,7 @@
 
 ### 10-29-24 2hr: Sounds, Sprite updates
 * Added new jump sound, new dash sound
-* Added new sprite set
+* Added new sprite set.
 
 
 ### 10-27-24: 5hr: Final mechanic adjustments
