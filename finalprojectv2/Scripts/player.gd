@@ -4,28 +4,32 @@ extends CharacterBody2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var jump_height_timer: Timer = $jumpHeightTimer
 @onready var SlowDownController: Node2D = $"../SlowDownCntrl"
-@onready var snd_dash: AudioStreamPlayer2D = $snd_dash
-@onready var snd_jmp: AudioStreamPlayer2D = $snd_jmp
+@onready var snd_dash: AudioStreamPlayer2D = $sounds/snd_dash
+@onready var snd_jmp: AudioStreamPlayer2D = $sounds/snd_jmp
+
+
+
 @onready var animated_spr: AnimatedSprite2D = $AnimatedSprite2D
+@onready var explosion_handler: Node2D = $explosionHandler
 
 
 const sprP1Dash = preload("res://Sprites/sprP1Dash.png")
 const sprP1Idle = preload("res://Sprites/sprP1.png")
 #Jumping
-const JUMP_VELOCITY = 250.0
-const JUMP_ACCELLERATION_MAG=50
+const JUMP_VELOCITY = 400.0
+const JUMP_ACCELLERATION_MAG=100
 #Dashing
-const DASH_MULTIPLER=2.2;
-const DASH_VERT_BOOST=-50;
-
+const DASH_MULTIPLER=2;
+const DASH_VERT_BOOST=-100;
+const AIR_FRICTION=5;
 
 const BURST_VERT_MOVE=JUMP_VELOCITY;
 const BURT_HORIZ_MOVE=JUMP_VELOCITY;
 
 #Running
-const MAX_SPEED = 100.0
+const MAX_SPEED = 200.0
 const DEFUALT_ACCELERATION=30;
-const ACCELERATION_MAG=4;
+const ACCELERATION_MAG=8;
 #--------------------------------------------------------------|
 #Jumping
 var Jump_Accelleration=JUMP_ACCELLERATION_MAG
@@ -100,6 +104,13 @@ func _physics_process(delta: float) -> void:
 		if dashesLeft>=1:
 			snd_dash.play();
 			dashing=true;
+			
+			
+			#EXPLOSION NOT WORKING!
+			#var sfx=explosion_handler.instantiate();
+			#get_parent().add_child(sfx);
+			#sfx.global_position=1;
+			
 			#sprite_2d.texture= sprP1Dash;
 			dashesLeft-=1;
 			
@@ -116,7 +127,7 @@ func _physics_process(delta: float) -> void:
 
 
 	if !dashing:
-		# Get the input direction and handle the movement/deceleration.
+		# Get the input direction and handle the sprite.
 		var direction := Input.get_axis("MoveLeft", "moveRight")
 		if direction <0:
 			facing=1;
@@ -128,17 +139,23 @@ func _physics_process(delta: float) -> void:
 		
 		#ANIMATION ZONE!
 		if jumping:
-			animated_spr.play("jump");
+			if velocity.y<0:
+				animated_spr.play("jump");
 		elif is_on_floor():
 			if direction:
 				animated_spr.play("run");
 			else:
 				animated_spr.play("idle");
+		else:
+			animated_spr.play("fall");
 		
 		
 		
 		if direction:
-				velocity.x = direction * Accelleration *slow_down
+				if is_on_floor():
+					velocity.x = direction * Accelleration *slow_down
+				else:
+					velocity.x = direction * Accelleration *slow_down-AIR_FRICTION
 				if Accelleration<=MAX_SPEED:
 					Accelleration+=ACCELERATION_MAG *slow_down;
 				#else:

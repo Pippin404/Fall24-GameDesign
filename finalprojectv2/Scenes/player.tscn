@@ -1,13 +1,14 @@
-[gd_scene load_steps=43 format=3 uid="uid://bh33t2tn125o7"]
+[gd_scene load_steps=57 format=3 uid="uid://bh33t2tn125o7"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_yoj5i"]
 [ext_resource type="Texture2D" uid="uid://213p6ttdnvkc" path="res://Sprites/newPlayer/Player Idle 48x48.png" id="2_4tgm2"]
 [ext_resource type="Texture2D" uid="uid://c7coetyto3s1t" path="res://Sprites/newPlayer/player air spin 48x48.png" id="2_bp37i"]
-[ext_resource type="AudioStream" uid="uid://dakdonx6nvyn1" path="res://Sounds/hit-3.wav" id="3_8tuy1"]
 [ext_resource type="Texture2D" uid="uid://cbgrplr3wmpob" path="res://Sprites/newPlayer/Full jump player.png" id="3_kywl8"]
 [ext_resource type="AudioStream" uid="uid://b55nfehdylowu" path="res://Sounds/jump-3.wav" id="3_ot83w"]
 [ext_resource type="AudioStream" uid="uid://kbw2q84nbbgm" path="res://Sounds/dashv2.mp3" id="4_qal4t"]
 [ext_resource type="Texture2D" uid="uid://cae4rstagaqot" path="res://Sprites/newPlayer/player run 48x48.png" id="5_ywlyh"]
+[ext_resource type="AudioStream" uid="uid://ch8rx3k20f4et" path="res://Sounds/background tracks/At The Arena Prep.wav" id="8_cwmeg"]
+[ext_resource type="Texture2D" uid="uid://b5b4dxj44p02u" path="res://Sprites/effects/Free Smoke Fx  Pixel 06.png" id="9_0od0k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n60fu"]
 atlas = ExtResource("2_bp37i")
@@ -169,7 +170,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qdsl2")
 }],
-"loop": true,
+"loop": false,
 "name": &"fall",
 "speed": 5.0
 }, {
@@ -223,9 +224,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1en4m")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_m74t5")
 }],
 "loop": false,
 "name": &"jump",
@@ -269,37 +267,144 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_6i5pg"]
-radius = 6.08276
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nspk0"]
+radius = 6.0
+height = 24.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yafyr"]
+atlas = ExtResource("9_0od0k")
+region = Rect2(0, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_va0t0"]
+atlas = ExtResource("9_0od0k")
+region = Rect2(64, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47pwi"]
+atlas = ExtResource("9_0od0k")
+region = Rect2(128, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_naqxr"]
+atlas = ExtResource("9_0od0k")
+region = Rect2(192, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_st4gy"]
+atlas = ExtResource("9_0od0k")
+region = Rect2(256, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fib67"]
+atlas = ExtResource("9_0od0k")
+region = Rect2(320, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ouboe"]
+atlas = ExtResource("9_0od0k")
+region = Rect2(384, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l5v7b"]
+atlas = ExtResource("9_0od0k")
+region = Rect2(448, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pgkyv"]
+atlas = ExtResource("9_0od0k")
+region = Rect2(512, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2o645"]
+atlas = ExtResource("9_0od0k")
+region = Rect2(576, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tii3c"]
+atlas = ExtResource("9_0od0k")
+region = Rect2(640, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_532uk"]
+atlas = ExtResource("9_0od0k")
+region = Rect2(704, 192, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u7abs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yafyr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_va0t0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_47pwi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_naqxr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_st4gy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fib67")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ouboe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l5v7b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pgkyv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2o645")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tii3c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_532uk")
+}],
+"loop": false,
+"name": &"explosion",
+"speed": 10.0
+}]
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_yoj5i")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_srvh6")
-animation = &"run"
+animation = &"jump"
 autoplay = "jump"
 
-[node name="dash_timer" type="Timer" parent="."]
-wait_time = 0.24
-one_shot = true
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 2)
-shape = SubResource("CircleShape2D_6i5pg")
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_nspk0")
+
+[node name="dash_timer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
 
 [node name="jumpHeightTimer" type="Timer" parent="."]
 wait_time = 0.07
 one_shot = true
 
-[node name="snd_jmp" type="AudioStreamPlayer2D" parent="."]
+[node name="sounds" type="Node2D" parent="."]
+
+[node name="snd_jmp" type="AudioStreamPlayer2D" parent="sounds"]
 stream = ExtResource("3_ot83w")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_8tuy1")
-
-[node name="snd_dash" type="AudioStreamPlayer2D" parent="."]
+[node name="snd_dash" type="AudioStreamPlayer2D" parent="sounds"]
 stream = ExtResource("4_qal4t")
+
+[node name="Backingv1" type="AudioStreamPlayer2D" parent="sounds"]
+stream = ExtResource("8_cwmeg")
+volume_db = -8.089
+autoplay = true
+
+[node name="explosionHandler" type="Node2D" parent="."]
+
+[node name="explosion" type="AnimatedSprite2D" parent="explosionHandler"]
+position = Vector2(-18, -10)
+sprite_frames = SubResource("SpriteFrames_u7abs")
+animation = &"explosion"
+autoplay = "explosion"
+frame = 11
+frame_progress = 1.0
 
 [connection signal="timeout" from="dash_timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="jumpHeightTimer" to="." method="_on_jump_height_timer_timeout"]

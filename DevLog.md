@@ -5,6 +5,11 @@
 * TODO: I still need to get the projectile working.
 * I completed [XYZ](some-link-to-ticket) 
 
+### 11-10-24: 1hr: Tileset adjustmet, explosion feedback, extended player movement
+* Fixed tileset bugs
+* Adjusted player movement to new sprites
+* attempted to make node to show dash
+* Added Background Music
 
 
 ### 11-09-24 2hr: Sprites and level rework
