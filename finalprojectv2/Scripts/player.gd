@@ -6,6 +6,9 @@ extends CharacterBody2D
 @onready var SlowDownController: Node2D = $"../SlowDownCntrl"
 @onready var snd_dash: AudioStreamPlayer2D = $sounds/snd_dash
 @onready var snd_jmp: AudioStreamPlayer2D = $sounds/snd_jmp
+@onready var jump_buffer_timer: Timer = $jumpBufferTimer
+
+var explosion_node= preload("res://Scenes/explosion_node.tscn");
 
 
 
@@ -44,8 +47,13 @@ var dashesLeft=1;
 var slow_down=1;
 var slow_down_ticker=0; #so 0 is normal, 1 is slowdown
 
+
+var currentCheckpoint=0;
 #--------------------------------------------------------------|
 func _physics_process(delta: float) -> void:
+	var currentCheckpoint=1;
+	
+	
 	slow_down=SlowDownController.slowMow;
 	if slow_down==0:
 		velocity.y=0;
@@ -85,16 +93,8 @@ func _physics_process(delta: float) -> void:
 
 	# Handle jump.
 	if Input.is_action_just_pressed("Jump") and is_on_floor() and slow_down!=0:
-		snd_jmp.play();
-		jumping=true;
-		jump_height_timer.start();
-		if slow_down==1:
-			velocity.y =-1*(JUMP_VELOCITY*slow_down);
-		else:
-			#SLOWDOWN JUMP MAGNITUDE
-			#If the slowdown is not 0, we need a special case to make sure the slowdown jump is bigger
-			velocity.y =JUMP_VELOCITY*-1*slow_down/4;
-			
+		jump();
+		#jump_buffer_timer.start();
 
 
 
@@ -104,7 +104,7 @@ func _physics_process(delta: float) -> void:
 		if dashesLeft>=1:
 			snd_dash.play();
 			dashing=true;
-			
+			spawnExplosion();
 			
 			#EXPLOSION NOT WORKING!
 			#var sfx=explosion_handler.instantiate();
@@ -128,7 +128,7 @@ func _physics_process(delta: float) -> void:
 
 	if !dashing:
 		# Get the input direction and handle the sprite.
-		var direction := Input.get_axis("MoveLeft", "moveRight")
+		var direction := Input.get_axis("MoveLeft", "MoveRight")
 		if direction <0:
 			facing=1;
 			animated_spr.flip_h=true;
@@ -183,6 +183,26 @@ func _on_jump_height_timer_timeout() -> void:
 		#print("High Jump");
 		#dash_snd.play();
 
+func spawnExplosion()->void:
+	print("spawned");
+	var NewExplode = explosion_node.instantiate();
+	add_child(NewExplode);
+
+func jump() -> void:
+	
+	
+	
+	if is_on_floor() and slow_down!=0:
+		snd_jmp.play();
+		jumping=true;
+		jump_height_timer.start();
+		if slow_down==1:
+			velocity.y =-1*(JUMP_VELOCITY*slow_down);
+		else:
+			#SLOWDOWN JUMP MAGNITUDE
+			#If the slowdown is not 0, we need a special case to make sure the slowdown jump is bigger
+			velocity.y =JUMP_VELOCITY*-1*slow_down/4;
+
 
 
 func burst_dash() -> void:
@@ -200,7 +220,7 @@ func burst_dash() -> void:
 		velocity.y=velocity.y+BURST_VERT_MOVE/10;
 		#print("down");
 		
-	if Input.is_action_pressed("moveRight"):
+	if Input.is_action_pressed("MoveRight"):
 		velocity.y+=DASH_VERT_BOOST;#vert boost is negative
 		velocity.x=velocity.x+BURT_HORIZ_MOVE;
 		#print("right");
@@ -210,3 +230,8 @@ func burst_dash() -> void:
 		velocity.x=velocity.x-BURT_HORIZ_MOVE;
 		#print("left");
 	dashing=false;
+
+
+func _on_jump_buffer_timer_timeout() -> void:
+	jump();
+	print("bufferJump!");

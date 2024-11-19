@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://bh33t2tn125o7"]
+[gd_scene load_steps=54 format=3 uid="uid://bh33t2tn125o7"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_yoj5i"]
 [ext_resource type="Texture2D" uid="uid://213p6ttdnvkc" path="res://Sprites/newPlayer/Player Idle 48x48.png" id="2_4tgm2"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cae4rstagaqot" path="res://Sprites/newPlayer/player run 48x48.png" id="5_ywlyh"]
 [ext_resource type="AudioStream" uid="uid://ch8rx3k20f4et" path="res://Sounds/background tracks/At The Arena Prep.wav" id="8_cwmeg"]
 [ext_resource type="Texture2D" uid="uid://b5b4dxj44p02u" path="res://Sprites/effects/Free Smoke Fx  Pixel 06.png" id="9_0od0k"]
+[ext_resource type="Script" path="res://Scripts/explosion_node.gd" id="9_iherl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n60fu"]
 atlas = ExtResource("2_bp37i")
@@ -283,22 +284,6 @@ region = Rect2(64, 192, 64, 64)
 atlas = ExtResource("9_0od0k")
 region = Rect2(128, 192, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_naqxr"]
-atlas = ExtResource("9_0od0k")
-region = Rect2(192, 192, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_st4gy"]
-atlas = ExtResource("9_0od0k")
-region = Rect2(256, 192, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fib67"]
-atlas = ExtResource("9_0od0k")
-region = Rect2(320, 192, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ouboe"]
-atlas = ExtResource("9_0od0k")
-region = Rect2(384, 192, 64, 64)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_l5v7b"]
 atlas = ExtResource("9_0od0k")
 region = Rect2(448, 192, 64, 64)
@@ -319,7 +304,7 @@ region = Rect2(640, 192, 64, 64)
 atlas = ExtResource("9_0od0k")
 region = Rect2(704, 192, 64, 64)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_u7abs"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_qyk54"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -330,18 +315,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_47pwi")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_naqxr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_st4gy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fib67")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ouboe")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_l5v7b")
@@ -360,7 +333,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"explosion",
-"speed": 10.0
+"speed": 0.0
 }]
 
 [node name="Player" type="CharacterBody2D"]
@@ -396,15 +369,15 @@ stream = ExtResource("8_cwmeg")
 volume_db = -8.089
 autoplay = true
 
-[node name="explosionHandler" type="Node2D" parent="."]
+[node name="explosionNode" type="Node2D" parent="."]
+visible = false
+script = ExtResource("9_iherl")
 
-[node name="explosion" type="AnimatedSprite2D" parent="explosionHandler"]
+[node name="explosion" type="AnimatedSprite2D" parent="explosionNode"]
 position = Vector2(-18, -10)
-sprite_frames = SubResource("SpriteFrames_u7abs")
+sprite_frames = SubResource("SpriteFrames_qyk54")
 animation = &"explosion"
 autoplay = "explosion"
-frame = 11
-frame_progress = 1.0
 
 [connection signal="timeout" from="dash_timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="jumpHeightTimer" to="." method="_on_jump_height_timer_timeout"]

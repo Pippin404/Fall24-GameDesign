@@ -12,6 +12,10 @@
 * Added Background Music
 
 
+### 11-19-24 4hr: Tilesets and node attempt
+* Worked for the past 10 days, didnt get all the specifics
+* more level. More failed nodes, failed checkpoint system. Pushing to itch
+
 ### 11-09-24 2hr: Sprites and level rework
 * Added new tiletset
 * Todo: randomize tiles, make tilemap set? for easy building
