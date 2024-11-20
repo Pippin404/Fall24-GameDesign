@@ -5,6 +5,15 @@
 * TODO: I still need to get the projectile working.
 * I completed [XYZ](some-link-to-ticket) 
 
+
+
+
+### 11-19-24: 3hr: added more map, made camera controls simulate "rooms"
+* Todo: collision camera down, platforms, build out levels
+* Added triggers if the player leaves the camera range. Node will jump to that place, making it appear like there are "Rooms"
+* Still need to figure out down triggers. Cannot get area2d to work correctly.
+
+
 ### 11-10-24: 1hr: Tileset adjustmet, explosion feedback, extended player movement
 * Fixed tileset bugs
 * Adjusted player movement to new sprites

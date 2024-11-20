@@ -7,6 +7,7 @@ extends CharacterBody2D
 @onready var snd_dash: AudioStreamPlayer2D = $sounds/snd_dash
 @onready var snd_jmp: AudioStreamPlayer2D = $sounds/snd_jmp
 @onready var jump_buffer_timer: Timer = $jumpBufferTimer
+@onready var camera_control: Node2D = $"../CameraControl"
 
 var explosion_node= preload("res://Scenes/explosion_node.tscn");
 
@@ -22,7 +23,7 @@ const sprP1Idle = preload("res://Sprites/sprP1.png")
 const JUMP_VELOCITY = 400.0
 const JUMP_ACCELLERATION_MAG=100
 #Dashing
-const DASH_MULTIPLER=2;
+const DASH_MULTIPLER=1.5;
 const DASH_VERT_BOOST=-100;
 const AIR_FRICTION=5;
 
@@ -184,7 +185,7 @@ func _on_jump_height_timer_timeout() -> void:
 		#dash_snd.play();
 
 func spawnExplosion()->void:
-	print("spawned");
+	#print("spawned");
 	var NewExplode = explosion_node.instantiate();
 	add_child(NewExplode);
 
@@ -221,12 +222,12 @@ func burst_dash() -> void:
 		#print("down");
 		
 	if Input.is_action_pressed("MoveRight"):
-		velocity.y+=DASH_VERT_BOOST;#vert boost is negative
+		#velocity.y+=DASH_VERT_BOOST;#vert boost is negative
 		velocity.x=velocity.x+BURT_HORIZ_MOVE;
 		#print("right");
 		
 	if Input.is_action_pressed("MoveLeft"):
-		velocity.y+=DASH_VERT_BOOST;#vert boost is negative
+		#velocity.y+=DASH_VERT_BOOST;#vert boost is negative
 		velocity.x=velocity.x-BURT_HORIZ_MOVE;
 		#print("left");
 	dashing=false;

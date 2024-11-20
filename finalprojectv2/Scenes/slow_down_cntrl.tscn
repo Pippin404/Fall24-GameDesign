@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://ck7nrfp24wd8u"]
+
+[ext_resource type="Script" path="res://Scripts/slow_down_cntrl.gd" id="1_0ohns"]
+[ext_resource type="AudioStream" uid="uid://bwpawpqi55ic2" path="res://Sounds/sndSlowDown.mp3" id="2_xjw0s"]
+
+[node name="SlowDownCntrl" type="Node2D"]
+position = Vector2(-163, -108)
+script = ExtResource("1_0ohns")
+
+[node name="snd_SlowDown" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(-82, -91)
+stream = ExtResource("2_xjw0s")
+
+[node name="slowdown_stopper_timer" type="Timer" parent="."]
+wait_time = 2.629
+
+[connection signal="timeout" from="slowdown_stopper_timer" to="." method="_on_slowdown_stopper_timer_timeout"]

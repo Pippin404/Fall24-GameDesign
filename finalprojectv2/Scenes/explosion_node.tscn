@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c2q3y8guusff3"]
+[gd_scene load_steps=11 format=3 uid="uid://c2q3y8guusff3"]
 
 [ext_resource type="Texture2D" uid="uid://b5b4dxj44p02u" path="res://Sprites/effects/Free Smoke Fx  Pixel 06.png" id="1_5nyng"]
 
@@ -13,22 +13,6 @@ region = Rect2(64, 192, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_47pwi"]
 atlas = ExtResource("1_5nyng")
 region = Rect2(128, 192, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_naqxr"]
-atlas = ExtResource("1_5nyng")
-region = Rect2(192, 192, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_st4gy"]
-atlas = ExtResource("1_5nyng")
-region = Rect2(256, 192, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fib67"]
-atlas = ExtResource("1_5nyng")
-region = Rect2(320, 192, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ouboe"]
-atlas = ExtResource("1_5nyng")
-region = Rect2(384, 192, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l5v7b"]
 atlas = ExtResource("1_5nyng")
@@ -50,7 +34,7 @@ region = Rect2(640, 192, 64, 64)
 atlas = ExtResource("1_5nyng")
 region = Rect2(704, 192, 64, 64)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_b7rkj"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_aikhh"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -61,18 +45,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_47pwi")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_naqxr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_st4gy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fib67")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ouboe")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_l5v7b")
@@ -91,13 +63,13 @@ animations = [{
 }],
 "loop": false,
 "name": &"explosion",
-"speed": 10.0
+"speed": 20.0
 }]
 
 [node name="explosionNode" type="Node2D"]
 
 [node name="explosion" type="AnimatedSprite2D" parent="."]
-position = Vector2(-18, -10)
-sprite_frames = SubResource("SpriteFrames_b7rkj")
+position = Vector2(-102, 24)
+sprite_frames = SubResource("SpriteFrames_aikhh")
 animation = &"explosion"
 autoplay = "explosion"
