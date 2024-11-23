@@ -6,8 +6,8 @@ extends CharacterBody2D
 @onready var SlowDownController: Node2D = $"../SlowDownCntrl"
 @onready var snd_dash: AudioStreamPlayer2D = $sounds/snd_dash
 @onready var snd_jmp: AudioStreamPlayer2D = $sounds/snd_jmp
-@onready var jump_buffer_timer: Timer = $jumpBufferTimer
 @onready var camera_control: Node2D = $"../CameraControl"
+@onready var jmp_buffer_timer: Timer = $jmp_buffer_timer
 
 var explosion_node= preload("res://Scenes/explosion_node.tscn");
 
@@ -24,7 +24,7 @@ const JUMP_VELOCITY = 400.0
 const JUMP_ACCELLERATION_MAG=100
 #Dashing
 const DASH_MULTIPLER=1.5;
-const DASH_VERT_BOOST=-100;
+const DASH_VERT_BOOST=-60;
 const AIR_FRICTION=5;
 
 const BURST_VERT_MOVE=JUMP_VELOCITY;
@@ -49,8 +49,16 @@ var slow_down=1;
 var slow_down_ticker=0; #so 0 is normal, 1 is slowdown
 
 
-var currentCheckpoint=0;
+var checkpointX=0;
+var checkpointY=0;
+
+
+
 #--------------------------------------------------------------|
+
+
+
+
 func _physics_process(delta: float) -> void:
 	var currentCheckpoint=1;
 	
@@ -94,8 +102,8 @@ func _physics_process(delta: float) -> void:
 
 	# Handle jump.
 	if Input.is_action_just_pressed("Jump") and is_on_floor() and slow_down!=0:
+		#jmp_buffer_timer.start();
 		jump();
-		#jump_buffer_timer.start();
 
 
 
@@ -105,6 +113,7 @@ func _physics_process(delta: float) -> void:
 		if dashesLeft>=1:
 			snd_dash.play();
 			dashing=true;
+			velocity.y=DASH_VERT_BOOST;
 			spawnExplosion();
 			
 			#EXPLOSION NOT WORKING!
@@ -190,9 +199,6 @@ func spawnExplosion()->void:
 	add_child(NewExplode);
 
 func jump() -> void:
-	
-	
-	
 	if is_on_floor() and slow_down!=0:
 		snd_jmp.play();
 		jumping=true;
@@ -233,6 +239,14 @@ func burst_dash() -> void:
 	dashing=false;
 
 
-func _on_jump_buffer_timer_timeout() -> void:
-	jump();
-	print("bufferJump!");
+
+
+func _on_ready() -> void:
+	checkpointX=0;
+	checkpointY=0;
+
+
+func _on_jmp_buffer_timer_timeout() -> void:
+	if is_on_floor() and slow_down!=0:
+			jump();
+			print("jmpBuffer!");

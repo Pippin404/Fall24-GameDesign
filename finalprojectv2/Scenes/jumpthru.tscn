@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://clbhm0c2gbiox"]
+
+[ext_resource type="Texture2D" uid="uid://b83l20236eive" path="res://Sprites/tileset/jumpthru.png" id="1_ul1pb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f36ie"]
+size = Vector2(32, 6)
+
+[node name="StaticBody2D" type="StaticBody2D"]
+position = Vector2(2, 1)
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 7
+visibility_layer = 7
+position = Vector2(1, -13)
+shape = SubResource("RectangleShape2D_f36ie")
+one_way_collision = true
+one_way_collision_margin = 10.6
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 0)
+texture = ExtResource("1_ul1pb")

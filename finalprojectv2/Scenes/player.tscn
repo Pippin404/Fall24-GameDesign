@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://bh33t2tn125o7"]
+[gd_scene load_steps=43 format=3 uid="uid://bh33t2tn125o7"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_yoj5i"]
 [ext_resource type="Texture2D" uid="uid://213p6ttdnvkc" path="res://Sprites/newPlayer/Player Idle 48x48.png" id="2_4tgm2"]
@@ -8,8 +8,6 @@
 [ext_resource type="AudioStream" uid="uid://kbw2q84nbbgm" path="res://Sounds/dashv2.mp3" id="4_qal4t"]
 [ext_resource type="Texture2D" uid="uid://cae4rstagaqot" path="res://Sprites/newPlayer/player run 48x48.png" id="5_ywlyh"]
 [ext_resource type="AudioStream" uid="uid://ch8rx3k20f4et" path="res://Sounds/background tracks/At The Arena Prep.wav" id="8_cwmeg"]
-[ext_resource type="Texture2D" uid="uid://b5b4dxj44p02u" path="res://Sprites/effects/Free Smoke Fx  Pixel 06.png" id="9_0od0k"]
-[ext_resource type="Script" path="res://Scripts/explosion_node.gd" id="9_iherl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n60fu"]
 atlas = ExtResource("2_bp37i")
@@ -272,71 +270,8 @@ animations = [{
 radius = 6.0
 height = 24.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yafyr"]
-atlas = ExtResource("9_0od0k")
-region = Rect2(0, 192, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_va0t0"]
-atlas = ExtResource("9_0od0k")
-region = Rect2(64, 192, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_47pwi"]
-atlas = ExtResource("9_0od0k")
-region = Rect2(128, 192, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_l5v7b"]
-atlas = ExtResource("9_0od0k")
-region = Rect2(448, 192, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pgkyv"]
-atlas = ExtResource("9_0od0k")
-region = Rect2(512, 192, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2o645"]
-atlas = ExtResource("9_0od0k")
-region = Rect2(576, 192, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tii3c"]
-atlas = ExtResource("9_0od0k")
-region = Rect2(640, 192, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_532uk"]
-atlas = ExtResource("9_0od0k")
-region = Rect2(704, 192, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_qyk54"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yafyr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_va0t0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_47pwi")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_l5v7b")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pgkyv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2o645")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tii3c")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_532uk")
-}],
-"loop": false,
-"name": &"explosion",
-"speed": 0.0
-}]
-
 [node name="Player" type="CharacterBody2D"]
+z_index = 20
 collision_layer = 15
 collision_mask = 15
 script = ExtResource("1_yoj5i")
@@ -355,7 +290,7 @@ wait_time = 0.3
 one_shot = true
 
 [node name="jumpHeightTimer" type="Timer" parent="."]
-wait_time = 0.07
+wait_time = 0.178
 one_shot = true
 
 [node name="sounds" type="Node2D" parent="."]
@@ -371,15 +306,9 @@ stream = ExtResource("8_cwmeg")
 volume_db = -8.089
 autoplay = true
 
-[node name="explosionNode" type="Node2D" parent="."]
-visible = false
-script = ExtResource("9_iherl")
-
-[node name="explosion" type="AnimatedSprite2D" parent="explosionNode"]
-position = Vector2(-18, -10)
-sprite_frames = SubResource("SpriteFrames_qyk54")
-animation = &"explosion"
-autoplay = "explosion"
+[node name="jmp_buffer_timer" type="Timer" parent="."]
+wait_time = 0.012
 
 [connection signal="timeout" from="dash_timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="jumpHeightTimer" to="." method="_on_jump_height_timer_timeout"]
+[connection signal="timeout" from="jmp_buffer_timer" to="." method="_on_jmp_buffer_timer_timeout"]

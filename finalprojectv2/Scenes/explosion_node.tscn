@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://c2q3y8guusff3"]
+[gd_scene load_steps=12 format=3 uid="uid://c2q3y8guusff3"]
 
 [ext_resource type="Texture2D" uid="uid://b5b4dxj44p02u" path="res://Sprites/effects/Free Smoke Fx  Pixel 06.png" id="1_5nyng"]
+[ext_resource type="Script" path="res://Scripts/explosion_node.gd" id="1_cfo2y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yafyr"]
 atlas = ExtResource("1_5nyng")
@@ -34,7 +35,7 @@ region = Rect2(640, 192, 64, 64)
 atlas = ExtResource("1_5nyng")
 region = Rect2(704, 192, 64, 64)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_aikhh"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_qyk54"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -63,13 +64,16 @@ animations = [{
 }],
 "loop": false,
 "name": &"explosion",
-"speed": 20.0
+"speed": 0.0
 }]
 
 [node name="explosionNode" type="Node2D"]
+visible = false
+script = ExtResource("1_cfo2y")
 
 [node name="explosion" type="AnimatedSprite2D" parent="."]
-position = Vector2(-102, 24)
-sprite_frames = SubResource("SpriteFrames_aikhh")
+visible = false
+position = Vector2(-18, -10)
+sprite_frames = SubResource("SpriteFrames_qyk54")
 animation = &"explosion"
 autoplay = "explosion"

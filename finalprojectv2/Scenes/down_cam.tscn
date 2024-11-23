@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://du374yak023a1"]
+
+[ext_resource type="Script" path="res://Scenes/down_cam.gd" id="1_mrpn5"]
+
+[node name="downCam" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_mrpn5")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

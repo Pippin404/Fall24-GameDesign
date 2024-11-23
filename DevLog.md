@@ -5,11 +5,15 @@
 * TODO: I still need to get the projectile working.
 * I completed [XYZ](some-link-to-ticket) 
 
-
+### 11-23-24 3hr: Camera down, checkpoint system
+* Stuggled to make area 2d work (collision mask problems)
+* Made a checkpoint system, and killzone simply teleports you to there
+* made a trigger that moves the camera down when hit. 
+* Added Lazer spikes killzone
 
 
 ### 11-19-24: 3hr: added more map, made camera controls simulate "rooms"
-* Todo: collision camera down, platforms, build out levels
+* Todo: collision camera down,build out levels, checkpoint system
 * Added triggers if the player leaves the camera range. Node will jump to that place, making it appear like there are "Rooms"
 * Still need to figure out down triggers. Cannot get area2d to work correctly.
 

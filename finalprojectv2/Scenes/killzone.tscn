@@ -1,4 +1,9 @@
-[gd_scene format=3 uid="uid://c3p26qob8nx76"]
+[gd_scene load_steps=3 format=3 uid="uid://c3p26qob8nx76"]
+
+[ext_resource type="PackedScene" uid="uid://co7fsst12w3u7" path="res://Scenes/LazerSpikes.tscn" id="1_28m4a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0x301"]
+size = Vector2(25.5, 8.375)
 
 [node name="Killzone" type="Area2D"]
 collision_mask = 2
@@ -6,3 +11,9 @@ collision_mask = 2
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.577
 one_shot = true
+
+[node name="AnimatedSprite2D" parent="." instance=ExtResource("1_28m4a")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8.1875)
+shape = SubResource("RectangleShape2D_0x301")
