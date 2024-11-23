@@ -5,7 +5,7 @@
 * TODO: I still need to get the projectile working.
 * I completed [XYZ](some-link-to-ticket) 
 
-### 11-23-24 3hr: Camera down, checkpoint system
+### 11-23-24 3hr: Camera down, checkpoint system, Killzones
 * Stuggled to make area 2d work (collision mask problems)
 * Made a checkpoint system, and killzone simply teleports you to there
 * made a trigger that moves the camera down when hit. 
