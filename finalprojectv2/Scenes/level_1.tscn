@@ -477,7 +477,7 @@ position_smoothing_enabled = true
 position_smoothing_speed = 8.835
 
 [node name="Player" parent="." instance=ExtResource("1_hw5io")]
-position = Vector2(1536, -208)
+position = Vector2(-224, 80)
 
 [node name="FG_BG" type="Node2D" parent="."]
 
