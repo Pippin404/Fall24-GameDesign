@@ -20,7 +20,7 @@ var explosion_node= preload("res://Scenes/explosion_node.tscn");
 const sprP1Dash = preload("res://Sprites/sprP1Dash.png")
 const sprP1Idle = preload("res://Sprites/sprP1.png")
 #Jumping
-const JUMP_VELOCITY = 400.0
+const JUMP_VELOCITY = 350.0
 const JUMP_ACCELLERATION_MAG=100
 #Dashing
 const DASH_MULTIPLER=1.5;

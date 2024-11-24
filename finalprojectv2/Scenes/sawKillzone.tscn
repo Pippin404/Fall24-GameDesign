@@ -1,0 +1,73 @@
+[gd_scene load_steps=10 format=3 uid="uid://dw87tyav1ivdi"]
+
+[ext_resource type="Texture2D" uid="uid://bq1pp6ssqo1w2" path="res://Sprites/utils/saw_idle.png" id="1_jdquo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0x301"]
+size = Vector2(11.75, 26.375)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gci83"]
+atlas = ExtResource("1_jdquo")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lfb1o"]
+atlas = ExtResource("1_jdquo")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ibwrn"]
+atlas = ExtResource("1_jdquo")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8vjhl"]
+atlas = ExtResource("1_jdquo")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6bu5e"]
+atlas = ExtResource("1_jdquo")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4iat"]
+atlas = ExtResource("1_jdquo")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_10ivi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gci83")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lfb1o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ibwrn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8vjhl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6bu5e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4iat")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="sawKillzone" type="Area2D"]
+collision_mask = 2
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.577
+one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(6.875, -0.8125)
+shape = SubResource("RectangleShape2D_0x301")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_10ivi")
+autoplay = "default"
+frame = 4
+frame_progress = 0.920229
