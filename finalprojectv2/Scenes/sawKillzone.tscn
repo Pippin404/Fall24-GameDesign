@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://dw87tyav1ivdi"]
+[gd_scene load_steps=11 format=3 uid="uid://dw87tyav1ivdi"]
 
 [ext_resource type="Texture2D" uid="uid://bq1pp6ssqo1w2" path="res://Sprites/utils/saw_idle.png" id="1_jdquo"]
+[ext_resource type="Script" path="res://Scripts/killzone.gd" id="1_l5lyx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0x301"]
 size = Vector2(11.75, 26.375)
@@ -57,6 +58,7 @@ animations = [{
 
 [node name="sawKillzone" type="Area2D"]
 collision_mask = 2
+script = ExtResource("1_l5lyx")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.577

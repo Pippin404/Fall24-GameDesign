@@ -268,7 +268,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nspk0"]
 radius = 6.0
-height = 24.0
+height = 20.0
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 20
@@ -282,7 +282,7 @@ animation = &"jump"
 autoplay = "jump"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 4)
+position = Vector2(-3, 5)
 shape = SubResource("CapsuleShape2D_nspk0")
 
 [node name="dash_timer" type="Timer" parent="."]

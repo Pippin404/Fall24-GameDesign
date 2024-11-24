@@ -5,6 +5,10 @@
 * TODO: I still need to get the projectile working.
 * I completed [XYZ](some-link-to-ticket) 
 
+### 11-24-24 3hr: Levels
+* added more levels, adjusted player movement
+* Made player hitbox smaller to account for no cyote time during headhitters
+
 ### 11-23-24 3hr: Camera down, checkpoint system, Killzones
 * Stuggled to make area 2d work (collision mask problems)
 * Made a checkpoint system, and killzone simply teleports you to there

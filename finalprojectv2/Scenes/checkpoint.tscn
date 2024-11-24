@@ -27,6 +27,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yncc0"]
+size = Vector2(32, 32)
 
 [node name="checkpoint" type="Area2D"]
 z_index = 1

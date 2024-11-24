@@ -1,5 +1,5 @@
 extends Area2D
-@onready var camera_control: Node2D = $"../CameraControl"
+@onready var camera_control: Node2D = $"../../CameraControl"
 
 
 
