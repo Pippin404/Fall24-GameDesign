@@ -621,8 +621,8 @@ position = Vector2(1088, 448)
 
 [node name="Killzone" parent="killzones 5-8" instance=ExtResource("5_w5131")]
 position = Vector2(672, 64)
-scale = Vector2(71.94, 30.135)
-skew = -1.2898
+scale = Vector2(68.945, 30.135)
+skew = -0.961676
 script = ExtResource("6_44c1r")
 
 [node name="Killzone2" parent="killzones 5-8" instance=ExtResource("5_w5131")]
